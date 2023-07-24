@@ -1,4 +1,4 @@
-package com.gps.phonetracker.numberlocator.family.tracklocation
+package com.gps.phonetracker.numberlocator.family.tracklocation.application
 
 import android.app.Application
 import android.content.Context
@@ -9,6 +9,6 @@ class MyApplication : Application() {
     }
     override fun onCreate() {
         super.onCreate()
-        context=applicationContext
+        context =applicationContext
     }
 }

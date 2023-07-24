@@ -33,7 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gps.phonetracker.numberlocator.family.tracklocation.LiveLocation
-import com.gps.phonetracker.numberlocator.family.tracklocation.Model.Function
+import com.gps.phonetracker.numberlocator.family.tracklocation.model.Function
 import com.gps.phonetracker.numberlocator.family.tracklocation.NumberLocator
 import com.gps.phonetracker.numberlocator.family.tracklocation.R
 
