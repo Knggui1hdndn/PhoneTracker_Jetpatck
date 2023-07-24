@@ -5,6 +5,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 android {
     namespace 'com.gps.phonetracker.numberlocator.family.tracklocation'
     compileSdk 33
@@ -15,7 +19,11 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        buildConfigField("String", "GG_APP_OPEN", apikeyProperties['GG_APP_OPEN'])
+        buildConfigField("String", "GG_BANNER", apikeyProperties['GG_BANNER'])
+        buildConfigField("String", "GG_NATIVE", apikeyProperties['GG_NATIVE'])
+        buildConfigField("String", "GG_FULL", apikeyProperties['GG_FULL'])
+        buildConfigField("String", "GG_REWARDED", apikeyProperties['GG_REWARDED'])
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
@@ -29,11 +37,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+    buildFeatures {
+        buildConfig true
+    }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     buildFeatures {
         compose true
@@ -45,6 +57,16 @@ android {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    dataBinding {
+        enabled true
+    }
+    lintOptions {
+        abortOnError false
+        absolutePaths false
     }
 }
 
@@ -82,4 +104,38 @@ dependencies {
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+    implementation files('libs/adshelper.aar')
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
+    implementation 'com.google.android.gms:play-services-ads:22.2.0'
+
+    implementation("com.android.billingclient:billing-ktx:6.0.1")
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.airbnb.android:lottie:6.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+
+    implementation 'com.google.gms:google-services:4.3.15'
+
+    implementation 'com.airbnb.android:lottie:6.0.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
+    implementation 'androidx.browser:browser:1.5.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-process:2.6.1'
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+    implementation 'androidx.media:media:1.5.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.21"
+    implementation "dev.shreyaspatil:capturable:1.0.1"
+    implementation 'com.github.SmartToolFactory:Compose-Screenshot:1.0.1'
+    implementation "io.coil-kt:coil-compose:2.2.2"
 }
